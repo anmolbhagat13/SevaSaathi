@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowRight, Edit2, Lock } from "lucide-react";
+import { ArrowRight, Edit2, Lock, CheckCircle2 } from "lucide-react";
 
 function FormReview({
     selectedService,
@@ -14,24 +14,27 @@ function FormReview({
     };
 
     return (
-        <div className="bg-[#0c0c0e] rounded-xl border border-neutral-800 p-5 space-y-5">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5">
             {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-neutral-800">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                 <div>
-                    <h3 className="text-sm font-semibold text-white">
-                        Application Form Preview
-                    </h3>
-                    <p className="text-xs text-neutral-400 mt-0.5">
-                        Extracted from verified proofs for {selectedService?.shortName}
+                    <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-orange-500" />
+                        <h3 className="text-sm font-bold text-slate-900">
+                            Auto-Filled Application Preview
+                        </h3>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1">
+                        Data extracted directly from verified proofs for {selectedService?.shortName}
                     </p>
                 </div>
 
                 <button
                     onClick={() => setIsEditing(!isEditing)}
-                    className="px-2.5 py-1.5 rounded-lg border border-neutral-800 hover:border-neutral-700 bg-neutral-900 text-neutral-300 text-xs flex items-center gap-1.5 transition"
+                    className="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-orange-300 bg-slate-50 hover:bg-orange-50 text-slate-700 hover:text-orange-700 text-xs font-semibold flex items-center gap-1.5 transition"
                 >
-                    <Edit2 className="w-3 h-3" />
-                    <span>{isEditing ? "Lock" : "Edit"}</span>
+                    <Edit2 className="w-3.5 h-3.5 text-orange-600" />
+                    <span>{isEditing ? "Lock Fields" : "Edit Values"}</span>
                 </button>
             </div>
 
@@ -40,8 +43,8 @@ function FormReview({
                 {Object.entries(formData).map(([k, v]) => {
                     const label = k.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
                     return (
-                        <div key={k} className="p-3 rounded-lg bg-neutral-900 border border-neutral-800 space-y-1">
-                            <label className="text-[11px] text-neutral-400 block font-medium">
+                        <div key={k} className="p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 space-y-1">
+                            <label className="text-[11px] text-slate-500 block font-semibold">
                                 {label}
                             </label>
                             {isEditing ? (
@@ -49,12 +52,12 @@ function FormReview({
                                     type="text"
                                     value={v}
                                     onChange={(e) => handleFieldChange(k, e.target.value)}
-                                    className="w-full bg-black border border-neutral-700 rounded px-2.5 py-1.5 text-xs text-white outline-none"
+                                    className="w-full bg-white border border-orange-400 focus:ring-2 focus:ring-orange-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 outline-none font-medium"
                                 />
                             ) : (
-                                <div className="text-xs text-white font-medium flex items-center justify-between">
+                                <div className="text-xs text-slate-900 font-bold flex items-center justify-between">
                                     <span>{v}</span>
-                                    <Lock className="w-3 h-3 text-neutral-600" />
+                                    <Lock className="w-3.5 h-3.5 text-slate-400" />
                                 </div>
                             )}
                         </div>
@@ -63,18 +66,21 @@ function FormReview({
             </div>
 
             {/* Statutory Self-Declaration */}
-            <div className="p-3 rounded-lg bg-neutral-900/60 border border-neutral-800 text-xs text-neutral-400 leading-relaxed">
-                I hereby affirm that the facts stated above are accurate and backed by verified records.
+            <div className="p-4 rounded-xl bg-orange-50/50 border border-orange-100 flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-orange-600 shrink-0 mt-0.5" />
+                <p className="text-xs text-slate-600 leading-relaxed">
+                    I hereby affirm that the facts stated above are accurate and backed by verified records. Submitting false statements attracts penalties under statutory rules.
+                </p>
             </div>
 
             {/* Proceed */}
             <div className="flex justify-end pt-2">
                 <button
                     onClick={onProceedToConsent}
-                    className="px-4 py-2 rounded-lg bg-white hover:bg-neutral-200 text-black text-xs font-semibold flex items-center gap-1.5 transition"
+                    className="px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold flex items-center gap-2 transition shadow-sm"
                 >
                     <span>Proceed to Explicit Consent</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                 </button>
             </div>
         </div>
