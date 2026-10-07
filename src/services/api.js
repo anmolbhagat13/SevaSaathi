@@ -22,13 +22,26 @@ export const api = {
         return data ? data.services : null;
     },
 
-    // 2. Validate Document
+    // 2. Validate Document (Legacy mock validation)
     validateDocument: async (payload) => {
         const data = await safeFetch("/api/validate-document", {
             method: "POST",
             body: JSON.stringify(payload)
         });
         return data;
+    },
+
+    // Document Verification API (POST /api/documents/verify)
+    verifyDocument: async (documentData) => {
+        const response = await fetch(`${API_BASE}/api/documents/verify`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(documentData)
+        });
+
+        return response.json();
     },
 
     // 3. Consent

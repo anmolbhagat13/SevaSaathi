@@ -11,6 +11,7 @@ import {
     FileText 
 } from "lucide-react";
 import { LANGUAGES } from "../../data/translations";
+import logo from "../../assets/logo.jpeg";
 
 function Navbar({ 
     activeTab, 
@@ -34,21 +35,29 @@ function Navbar({
     ];
 
     return (
-        <header className="sticky top-0 z-30 bg-[#09090b]/95 backdrop-blur border-b border-neutral-800">
+        <header className="sticky top-0 z-30 bg-white border-b border-orange-100 shadow-sm">
+            {/* Top Accent Strip in Warm GovTech Orange */}
+            <div className="h-1 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500" />
+
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                <div className="flex items-center justify-between h-14">
-                    {/* Brand */}
+                <div className="flex items-center justify-between h-16">
+                    {/* Brand with Logo */}
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-white text-black font-bold flex items-center justify-center text-sm tracking-tight">
-                            S
+                        <div className="w-10 h-10 rounded-xl overflow-hidden border border-orange-200 shadow-sm flex items-center justify-center bg-orange-50">
+                            <img src={logo} alt="SevaSaathi" className="w-full h-full object-cover" />
                         </div>
-                        <div className="flex items-baseline gap-2">
-                            <span className="font-semibold text-white tracking-tight text-sm sm:text-base">
-                                {t.appTitle}
-                            </span>
-                            <span className="text-xs text-neutral-500 hidden sm:inline">
-                                Citizen Agent
-                            </span>
+                        <div>
+                            <div className="flex items-baseline gap-2">
+                                <span className="font-bold text-slate-900 tracking-tight text-base sm:text-lg">
+                                    {t.appTitle}
+                                </span>
+                                <span className="text-[11px] font-semibold uppercase px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 hidden sm:inline">
+                                    GovTech AI
+                                </span>
+                            </div>
+                            <p className="text-[11px] text-slate-500">
+                                Citizen Assistant for Government Services
+                            </p>
                         </div>
                     </div>
 
@@ -57,28 +66,28 @@ function Navbar({
                         {/* Audio Toggle */}
                         <button
                             onClick={() => setIsVoiceMuted(!isVoiceMuted)}
-                            title={isVoiceMuted ? "Enable Voice" : "Mute Voice"}
+                            title={isVoiceMuted ? "Enable Voice Assistant" : "Mute Voice Assistant"}
                             className={`p-2 rounded-lg border text-xs transition ${
                                 isVoiceMuted
-                                    ? "border-neutral-800 text-neutral-500 hover:text-white"
-                                    : "border-neutral-700 bg-neutral-800 text-white"
+                                    ? "border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50"
+                                    : "border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-100"
                             }`}
                         >
-                            {isVoiceMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                            {isVoiceMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                         </button>
 
                         {/* Language Selector */}
                         <div className="relative">
                             <button
                                 onClick={() => setLangOpen(!langOpen)}
-                                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-neutral-800 hover:border-neutral-700 bg-neutral-900 text-neutral-300 text-xs transition"
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-orange-200 hover:bg-orange-50 text-slate-700 text-xs font-medium transition"
                             >
-                                <Globe className="w-3.5 h-3.5 text-neutral-400" />
+                                <Globe className="w-3.5 h-3.5 text-orange-600" />
                                 <span>{currentLangObj.native}</span>
                             </button>
 
                             {langOpen && (
-                                <div className="absolute right-0 mt-1.5 w-36 rounded-lg bg-neutral-900 border border-neutral-800 shadow-xl py-1 z-50">
+                                <div className="absolute right-0 mt-1.5 w-36 rounded-xl bg-white border border-slate-200 shadow-lg py-1 z-50">
                                     {LANGUAGES.map((lang) => (
                                         <button
                                             key={lang.code}
@@ -86,27 +95,27 @@ function Navbar({
                                                 setLanguage(lang.code);
                                                 setLangOpen(false);
                                             }}
-                                            className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between hover:bg-neutral-800 transition ${
-                                                currentLanguage === lang.code ? "text-white font-semibold bg-neutral-800/60" : "text-neutral-400"
+                                            className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-orange-50 transition ${
+                                                currentLanguage === lang.code ? "text-orange-700 font-bold bg-orange-50/60" : "text-slate-700"
                                             }`}
                                         >
                                             <span>{lang.native}</span>
-                                            <span className="text-[10px] text-neutral-500">{lang.name}</span>
+                                            <span className="text-[10px] text-slate-400">{lang.name}</span>
                                         </button>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Minimal Profile Icon */}
-                        <div className="w-7 h-7 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-300 text-xs font-semibold flex items-center justify-center ml-1">
+                        {/* Citizen Profile Badge */}
+                        <div className="w-8 h-8 rounded-full bg-orange-100 border border-orange-200 text-orange-800 text-xs font-bold flex items-center justify-center ml-1">
                             A
                         </div>
                     </div>
                 </div>
 
-                {/* Minimal Navigation Tabs */}
-                <nav className="flex space-x-1 overflow-x-auto py-1.5 border-t border-neutral-900 no-scrollbar">
+                {/* Navigation Tabs */}
+                <nav className="flex space-x-1 overflow-x-auto py-2 border-t border-slate-100 no-scrollbar">
                     {navTabs.map((tab) => {
                         const Icon = tab.icon;
                         const isActive = activeTab === tab.id;
@@ -114,10 +123,10 @@ function Navbar({
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs whitespace-nowrap transition ${
+                                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition ${
                                     isActive
-                                        ? "bg-white text-black font-medium"
-                                        : "text-neutral-400 hover:text-white hover:bg-neutral-900"
+                                        ? "bg-orange-600 text-white shadow-sm shadow-orange-600/20"
+                                        : "text-slate-600 hover:text-orange-700 hover:bg-orange-50"
                                 }`}
                             >
                                 <Icon className="w-3.5 h-3.5" />

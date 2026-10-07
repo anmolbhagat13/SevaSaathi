@@ -208,8 +208,9 @@ function Dashboard() {
     }, 0);
 
     return (
-        <div className="min-h-screen bg-[#050505] text-neutral-200 flex flex-col">
-            {/* Minimal Header */}
+        <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col">
+
+            {/* Navbar */}
             <Navbar
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
@@ -221,175 +222,335 @@ function Dashboard() {
             />
 
             {/* Main */}
-            <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+            <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
                 {activeTab === "agent" && (
-                    <div className="space-y-4">
-                        {/* Minimal Service Selector */}
-                        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-                            {SERVICES_DATA.map((srv) => {
-                                const isSelected = selectedService.id === srv.id;
-                                return (
-                                    <button
-                                        key={srv.id}
-                                        onClick={() => handleSelectService(srv)}
-                                        className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition ${
-                                            isSelected
-                                                ? "bg-white text-black"
-                                                : "bg-[#0c0c0e] border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700"
-                                        }`}
-                                    >
-                                        {srv.shortName}
-                                    </button>
-                                );
-                            })}
-                        </div>
+                    <div className="space-y-5">
 
-                        {/* Split Screen Chat & Workspace */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                            {/* Left: Chat (5 cols) */}
-                            <div className="lg:col-span-5">
-                                <AgentChat
-                                    t={t}
-                                    currentLanguage={currentLanguage}
-                                    isVoiceMuted={isVoiceMuted}
-                                    selectedService={selectedService}
-                                    onOpenDocs={() => setAgentSubView("docs")}
-                                    onOpenConsent={() => setIsConsentOpen(true)}
-                                    onOpenFormReview={() => setAgentSubView("autofill")}
-                                    onOpenEscalation={() => setActiveTab("escalation")}
-                                />
-                            </div>
+                        {/* Page Heading */}
+                        <div className="border-b border-slate-200 pb-4">
+                            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
 
-                            {/* Right: Workspace (7 cols) */}
-                            <div className="lg:col-span-7 flex flex-col space-y-3">
-                                {/* Sub-navigation */}
-                                <div className="flex items-center gap-1.5 border-b border-neutral-800 pb-2 text-xs">
-                                    <button
-                                        onClick={() => setAgentSubView("docs")}
-                                        className={`px-3 py-1 rounded-md transition ${
-                                            agentSubView === "docs" ? "bg-neutral-800 text-white font-medium" : "text-neutral-400 hover:text-white"
-                                        }`}
-                                    >
-                                        1. Documents
-                                    </button>
-                                    <button
-                                        onClick={() => setAgentSubView("autofill")}
-                                        className={`px-3 py-1 rounded-md transition ${
-                                            agentSubView === "autofill" ? "bg-neutral-800 text-white font-medium" : "text-neutral-400 hover:text-white"
-                                        }`}
-                                    >
-                                        2. Form Review
-                                    </button>
-                                    <button
-                                        onClick={() => setAgentSubView("tracking")}
-                                        className={`px-3 py-1 rounded-md transition ${
-                                            agentSubView === "tracking" ? "bg-neutral-800 text-white font-medium" : "text-neutral-400 hover:text-white"
-                                        }`}
-                                    >
-                                        3. Status & Tracking
-                                    </button>
-                                </div>
-
-                                {/* Active Subview */}
                                 <div>
-                                    {agentSubView === "docs" && (
-                                        <DocumentHub
-                                            selectedService={selectedService}
-                                            documentsState={documentsState}
-                                            setDocumentsState={setDocumentsState}
-                                            onProceedToForm={() => setAgentSubView("autofill")}
-                                            onRaiseEscalation={handleRaiseEscalation}
-                                        />
-                                    )}
+                                    <p className="text-xs font-medium uppercase tracking-wide text-blue-800 mb-1">
+                                        Citizen Services
+                                    </p>
 
-                                    {agentSubView === "autofill" && (
-                                        <FormReview
-                                            selectedService={selectedService}
-                                            formData={formData}
-                                            setFormData={setFormData}
-                                            onProceedToConsent={() => setIsConsentOpen(true)}
-                                        />
-                                    )}
+                                    <h1 className="text-xl sm:text-2xl font-bold text-slate-900">
+                                        SevaSaathi Service Assistant
+                                    </h1>
 
-                                    {agentSubView === "tracking" && (
-                                        <div className="bg-[#0c0c0e] rounded-xl border border-neutral-800 p-5 space-y-3">
-                                            <div className="flex items-center justify-between pb-3 border-b border-neutral-800">
-                                                <h3 className="text-sm font-semibold text-white">Application Status</h3>
-                                                <button
-                                                    onClick={() => setActiveTab("portal")}
-                                                    className="text-xs text-neutral-400 hover:text-white"
-                                                >
-                                                    View in Gov Portal →
-                                                </button>
-                                            </div>
-
-                                            <div className="space-y-2">
-                                                {applications.map((app) => (
-                                                    <div
-                                                        key={app.id}
-                                                        className="p-3 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-between text-xs"
-                                                    >
-                                                        <div>
-                                                            <div className="flex items-center gap-2">
-                                                                <span className="font-mono text-white font-medium">{app.id}</span>
-                                                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-300">
-                                                                    {app.status}
-                                                                </span>
-                                                            </div>
-                                                            <p className="text-neutral-400 mt-0.5">{app.serviceName} ({app.applicantName})</p>
-                                                        </div>
-                                                        <button
-                                                            onClick={() => {
-                                                                setSelectedAppId(app.id);
-                                                                setActiveTab("portal");
-                                                            }}
-                                                            className="px-2.5 py-1 rounded bg-neutral-800 hover:bg-neutral-700 text-white text-xs transition"
-                                                        >
-                                                            Inspect
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
+                                    <p className="text-sm text-slate-500 mt-1">
+                                        Apply for government services and track your applications.
+                                    </p>
                                 </div>
+
+                                <div className="flex items-center gap-2 text-xs text-slate-500">
+                                    <span className="w-2 h-2 rounded-full bg-green-600" />
+                                    Services Available
+                                </div>
+
                             </div>
                         </div>
+
+
+                        {/* Service Selector */}
+                        <section>
+                            <div className="flex items-center justify-between mb-2">
+                                <h2 className="text-sm font-semibold text-slate-800">
+                                    Select a Service
+                                </h2>
+
+                                <span className="text-xs text-slate-500">
+                                    Available services
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+
+                                {SERVICES_DATA.map((srv) => {
+                                    const isSelected = selectedService.id === srv.id;
+
+                                    return (
+                                        <button
+                                            key={srv.id}
+                                            onClick={() => handleSelectService(srv)}
+                                            className={`px-4 py-2 rounded-md border text-sm font-medium whitespace-nowrap transition ${isSelected
+                                                    ? "bg-blue-900 border-blue-900 text-white shadow-sm"
+                                                    : "bg-white border-slate-200 text-slate-600 hover:border-blue-300 hover:text-blue-900 hover:bg-blue-50"
+                                                }`}
+                                        >
+                                            {srv.shortName}
+                                        </button>
+                                    );
+                                })}
+
+                            </div>
+                        </section>
+
+
+                        {/* Main Workspace */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+                            {/* Citizen Assistant */}
+                            <div className="lg:col-span-5">
+
+                                <div className="mb-2 flex items-center justify-between">
+                                    <h2 className="text-sm font-semibold text-slate-800">
+                                        Citizen Assistance
+                                    </h2>
+
+                                    <span className="text-xs text-slate-500">
+                                        Step 1
+                                    </span>
+                                </div>
+
+                                <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                                    <AgentChat
+                                        t={t}
+                                        currentLanguage={currentLanguage}
+                                        isVoiceMuted={isVoiceMuted}
+                                        selectedService={selectedService}
+                                        onOpenDocs={() => setAgentSubView("docs")}
+                                        onOpenConsent={() => setIsConsentOpen(true)}
+                                        onOpenFormReview={() => setAgentSubView("autofill")}
+                                        onOpenEscalation={() => setActiveTab("escalation")}
+                                    />
+                                </div>
+
+                            </div>
+
+
+                            {/* Workspace */}
+                            <div className="lg:col-span-7">
+
+                                <div className="mb-2 flex items-center justify-between">
+                                    <h2 className="text-sm font-semibold text-slate-800">
+                                        Application Workspace
+                                    </h2>
+
+                                    <span className="text-xs text-slate-500">
+                                        Step {agentSubView === "docs" ? "1" : agentSubView === "autofill" ? "2" : "3"} of 3
+                                    </span>
+                                </div>
+
+                                <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+
+                                    {/* Sub Navigation */}
+                                    <div className="flex items-center overflow-x-auto border-b border-slate-200 bg-slate-50">
+
+                                        <button
+                                            onClick={() => setAgentSubView("docs")}
+                                            className={`px-4 py-3 text-sm whitespace-nowrap border-b-2 transition ${agentSubView === "docs"
+                                                    ? "border-blue-800 text-blue-900 font-semibold bg-white"
+                                                    : "border-transparent text-slate-500 hover:text-blue-900 hover:bg-white"
+                                                }`}
+                                        >
+                                            <span className="mr-2">1.</span>
+                                            Documents
+                                        </button>
+
+                                        <button
+                                            onClick={() => setAgentSubView("autofill")}
+                                            className={`px-4 py-3 text-sm whitespace-nowrap border-b-2 transition ${agentSubView === "autofill"
+                                                    ? "border-blue-800 text-blue-900 font-semibold bg-white"
+                                                    : "border-transparent text-slate-500 hover:text-blue-900 hover:bg-white"
+                                                }`}
+                                        >
+                                            <span className="mr-2">2.</span>
+                                            Form Review
+                                        </button>
+
+                                        <button
+                                            onClick={() => setAgentSubView("tracking")}
+                                            className={`px-4 py-3 text-sm whitespace-nowrap border-b-2 transition ${agentSubView === "tracking"
+                                                    ? "border-blue-800 text-blue-900 font-semibold bg-white"
+                                                    : "border-transparent text-slate-500 hover:text-blue-900 hover:bg-white"
+                                                }`}
+                                        >
+                                            <span className="mr-2">3.</span>
+                                            Status & Tracking
+                                        </button>
+
+                                    </div>
+
+
+                                    {/* Active Subview */}
+                                    <div className="p-4 sm:p-5">
+
+                                        {agentSubView === "docs" && (
+                                            <DocumentHub
+                                                selectedService={selectedService}
+                                                documentsState={documentsState}
+                                                setDocumentsState={setDocumentsState}
+                                                onProceedToForm={() => setAgentSubView("autofill")}
+                                                onRaiseEscalation={handleRaiseEscalation}
+                                            />
+                                        )}
+
+
+                                        {agentSubView === "autofill" && (
+                                            <FormReview
+                                                selectedService={selectedService}
+                                                formData={formData}
+                                                setFormData={setFormData}
+                                                onProceedToConsent={() => setIsConsentOpen(true)}
+                                            />
+                                        )}
+
+
+                                        {agentSubView === "tracking" && (
+                                            <div className="space-y-4">
+
+                                                {/* Tracking Header */}
+                                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-slate-200">
+
+                                                    <div>
+                                                        <h3 className="text-base font-semibold text-slate-900">
+                                                            Application Status
+                                                        </h3>
+
+                                                        <p className="text-xs text-slate-500 mt-1">
+                                                            Track the status of your submitted government applications.
+                                                        </p>
+                                                    </div>
+
+                                                    <button
+                                                        onClick={() => setActiveTab("portal")}
+                                                        className="text-sm font-medium text-blue-800 hover:text-blue-950"
+                                                    >
+                                                        View Government Portal →
+                                                    </button>
+
+                                                </div>
+
+
+                                                {/* Applications */}
+                                                <div className="space-y-3">
+
+                                                    {applications.map((app) => (
+                                                        <div
+                                                            key={app.id}
+                                                            className="border border-slate-200 rounded-md p-4 bg-white hover:border-blue-200 transition"
+                                                        >
+
+                                                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                                                                <div>
+
+                                                                    <div className="flex flex-wrap items-center gap-2">
+
+                                                                        <span className="font-mono text-sm font-semibold text-slate-900">
+                                                                            {app.id}
+                                                                        </span>
+
+                                                                        <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-green-50 text-green-700 border border-green-200">
+                                                                            {app.status}
+                                                                        </span>
+
+                                                                    </div>
+
+                                                                    <p className="text-sm text-slate-600 mt-1">
+                                                                        {app.serviceName}
+                                                                    </p>
+
+                                                                    <p className="text-xs text-slate-400 mt-0.5">
+                                                                        Applicant: {app.applicantName}
+                                                                    </p>
+
+                                                                </div>
+
+
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setSelectedAppId(app.id);
+                                                                        setActiveTab("portal");
+                                                                    }}
+                                                                    className="px-4 py-2 rounded-md border border-blue-800 text-blue-900 hover:bg-blue-900 hover:text-white text-sm font-medium transition"
+                                                                >
+                                                                    View Details
+                                                                </button>
+
+                                                            </div>
+
+                                                        </div>
+                                                    ))}
+
+                                                </div>
+
+                                            </div>
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
                 )}
 
+
+                {/* Government Portal */}
                 {activeTab === "portal" && (
-                    <GovernmentPortal
-                        applications={applications}
-                        setApplications={setApplications}
-                        selectedAppId={selectedAppId}
-                        setSelectedAppId={setSelectedAppId}
-                    />
+                    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                        <GovernmentPortal
+                            applications={applications}
+                            setApplications={setApplications}
+                            selectedAppId={selectedAppId}
+                            setSelectedAppId={setSelectedAppId}
+                        />
+                    </div>
                 )}
 
+
+                {/* Audit Log */}
                 {activeTab === "audit" && (
-                    <AuditLog auditLogs={auditLogs} />
+                    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                        <AuditLog auditLogs={auditLogs} />
+                    </div>
                 )}
 
+
+                {/* Escalation */}
                 {activeTab === "escalation" && (
-                    <EscalationDesk
-                        escalations={escalations}
-                        setEscalations={setEscalations}
-                        onSimulateStuckAgent={() => handleRaiseEscalation({
-                            reason: "Water-damaged 1952 Record & Disputed Boundary",
-                            agentDiagnosis: "Automated OCR rejected scan twice. Escalated to Jan-Sevak desk."
-                        })}
-                    />
+                    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                        <EscalationDesk
+                            escalations={escalations}
+                            setEscalations={setEscalations}
+                            onSimulateStuckAgent={() =>
+                                handleRaiseEscalation({
+                                    reason: "Water-damaged 1952 Record & Disputed Boundary",
+                                    agentDiagnosis:
+                                        "Automated OCR rejected scan twice. Escalated to Jan-Sevak desk."
+                                })
+                            }
+                        />
+                    </div>
                 )}
 
+
+                {/* Metrics */}
                 {activeTab === "metrics" && (
-                    <MetricsDashboard middlemanSaved={totalMiddlemanSaved} />
+                    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                        <MetricsDashboard
+                            middlemanSaved={totalMiddlemanSaved}
+                        />
+                    </div>
                 )}
 
+
+                {/* Design Note */}
                 {activeTab === "designNote" && (
-                    <DesignNote />
+                    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                        <DesignNote />
+                    </div>
                 )}
+
             </main>
+
 
             {/* Consent Modal */}
             <ConsentModal
@@ -400,6 +561,7 @@ function Dashboard() {
                 onConsentGranted={handleConsentGranted}
                 onConsentDeclined={handleConsentDeclined}
             />
+
         </div>
     );
 }
