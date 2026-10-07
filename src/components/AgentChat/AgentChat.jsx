@@ -4,7 +4,10 @@ import {
     Mic, 
     MicOff, 
     Volume2, 
-    ArrowRight
+    ArrowRight,
+    Paperclip,
+    Sparkles,
+    Bot
 } from "lucide-react";
 import { api } from "../../services/api";
 import { LANGUAGES } from "../../data/translations";
@@ -26,9 +29,9 @@ function AgentChat({
             text: t.welcomeMessage,
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             actions: [
+                "Upload Documents",
                 "Apply for Income Certificate",
                 "Apply for PM-Kisan Subsidy",
-                "Apply for Solar Subsidy",
                 "Check Application Status"
             ]
         }
@@ -115,7 +118,7 @@ function AgentChat({
 
         setIsTyping(false);
 
-        let replyText = res?.reply || "I am processing your request. Please proceed to upload the required documents or review the application form.";
+        let replyText = res?.reply || "I am processing your request. Please upload your required documents or review the application form.";
         let actions = res?.suggestedActions || ["Upload Documents", "Review Form", "Need Human Help"];
 
         const agentMsg = {
@@ -143,42 +146,48 @@ function AgentChat({
     };
 
     return (
-        <div className="flex flex-col h-[620px] bg-[#0c0c0e] rounded-xl border border-neutral-800 overflow-hidden">
+        <div className="flex flex-col h-[620px] bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             {/* Header */}
-            <div className="px-4 py-3 bg-[#111113] border-b border-neutral-800 flex items-center justify-between">
-                <div>
-                    <h3 className="text-xs font-semibold text-white">
-                        AI Assistant
-                    </h3>
-                    <p className="text-[11px] text-neutral-400">
-                        {selectedService ? selectedService.shortName : "General Inquiry"}
-                    </p>
+            <div className="px-4 py-3.5 bg-orange-50/60 border-b border-orange-100 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-orange-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                        <Bot className="w-4 h-4" />
+                    </div>
+                    <div>
+                        <h3 className="text-xs font-bold text-slate-800">
+                            AI Citizen Assistant
+                        </h3>
+                        <p className="text-[11px] text-slate-500">
+                            {selectedService ? selectedService.shortName : "General Citizen Inquiries"}
+                        </p>
+                    </div>
                 </div>
-                <div className="flex items-center gap-1.5 text-[11px] text-neutral-400">
-                    <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                    <span>Active</span>
+
+                <div className="flex items-center gap-1.5 text-[11px] text-orange-700 bg-white px-2.5 py-1 rounded-full border border-orange-200 font-medium">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>Agent Online</span>
                 </div>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {/* Messages Feed */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-slate-50/50">
                 {messages.map((m) => {
                     const isAgent = m.sender === "agent";
                     return (
                         <div key={m.id} className={`flex flex-col ${isAgent ? "items-start" : "items-end"}`}>
-                            <div className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-xs leading-relaxed ${
+                            <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-xs sm:text-sm leading-relaxed ${
                                 isAgent
-                                    ? "bg-neutral-900 border border-neutral-800 text-neutral-200"
-                                    : "bg-white text-black font-medium"
+                                    ? "bg-white border border-slate-200 text-slate-800 rounded-tl-sm shadow-sm"
+                                    : "bg-orange-600 text-white rounded-tr-sm shadow-sm"
                             }`}>
                                 <p className="whitespace-pre-wrap">{m.text}</p>
                                 
                                 {isAgent && (
-                                    <div className="flex items-center justify-between mt-1.5 pt-1 border-t border-neutral-800/80 text-[10px] text-neutral-500">
+                                    <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px] text-slate-400">
                                         <span>{m.timestamp}</span>
                                         <button 
                                             onClick={() => speakText(m.text)}
-                                            className="hover:text-white flex items-center gap-1 transition"
+                                            className="hover:text-orange-600 flex items-center gap-1 transition font-medium"
                                         >
                                             <Volume2 className="w-3 h-3" />
                                             <span>Listen</span>
@@ -187,14 +196,14 @@ function AgentChat({
                                 )}
                             </div>
 
-                            {/* Action chips */}
+                            {/* Suggested Action Chips */}
                             {isAgent && m.actions && (
-                                <div className="flex flex-wrap gap-1 mt-2">
+                                <div className="flex flex-wrap gap-1.5 mt-2">
                                     {m.actions.map((act, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => handleActionClick(act)}
-                                            className="text-[11px] px-2.5 py-1 rounded-md bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-white transition flex items-center gap-1"
+                                            className="text-[11px] px-3 py-1 rounded-full bg-white hover:bg-orange-50 border border-orange-200 text-orange-700 hover:border-orange-400 font-medium transition flex items-center gap-1 shadow-2xs"
                                         >
                                             <span>{act}</span>
                                             <ArrowRight className="w-2.5 h-2.5 opacity-60" />
@@ -207,16 +216,16 @@ function AgentChat({
                 })}
 
                 {isTyping && (
-                    <div className="text-[11px] text-neutral-500 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" />
-                        <span>Thinking...</span>
+                    <div className="text-[11px] text-slate-400 flex items-center gap-2 pl-2">
+                        <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+                        <span>SevaSaathi is reviewing portal rules...</span>
                     </div>
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input bar */}
-            <div className="p-3 bg-[#111113] border-t border-neutral-800">
+            {/* Input Bar */}
+            <div className="p-3 bg-white border-t border-slate-200">
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -224,31 +233,44 @@ function AgentChat({
                     }}
                     className="flex items-center gap-2"
                 >
+                    {/* Attachment: directly opens document upload */}
+                    <button
+                        type="button"
+                        onClick={onOpenDocs}
+                        title="Upload Documents"
+                        className="p-2.5 rounded-xl border border-slate-200 hover:border-orange-300 hover:bg-orange-50 text-slate-500 hover:text-orange-600 transition"
+                    >
+                        <Paperclip className="w-4 h-4" />
+                    </button>
+
+                    {/* Microphone Toggle */}
                     <button
                         type="button"
                         onClick={toggleSpeech}
                         title={isListening ? "Stop listening" : "Speak via microphone"}
-                        className={`p-2 rounded-lg border transition ${
+                        className={`p-2.5 rounded-xl border transition ${
                             isListening
-                                ? "bg-white text-black border-white"
-                                : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white"
+                                ? "bg-orange-600 text-white border-orange-600 animate-pulse ring-2 ring-orange-200"
+                                : "border-slate-200 hover:border-orange-300 hover:bg-orange-50 text-slate-600 hover:text-orange-600"
                         }`}
                     >
                         {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
                     </button>
 
+                    {/* Text input */}
                     <input
                         type="text"
                         value={inputVal}
                         onChange={(e) => setInputVal(e.target.value)}
-                        placeholder={isListening ? "Listening..." : t.chatPlaceholder}
-                        className="flex-1 bg-neutral-900 border border-neutral-800 focus:border-neutral-600 rounded-lg px-3 py-2 text-xs text-white placeholder-neutral-500 outline-none transition"
+                        placeholder={isListening ? "Listening to your voice..." : t.chatPlaceholder}
+                        className="flex-1 bg-slate-50 border border-slate-200 focus:bg-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none transition"
                     />
 
+                    {/* Send button */}
                     <button
                         type="submit"
                         disabled={!inputVal.trim()}
-                        className="p-2 rounded-lg bg-white hover:bg-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed text-black transition"
+                        className="p-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 disabled:opacity-40 disabled:cursor-not-allowed text-white shadow-sm transition"
                     >
                         <Send className="w-4 h-4" />
                     </button>

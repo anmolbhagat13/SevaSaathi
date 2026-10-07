@@ -10,6 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 
+// Document verification routes (DEMO verification)
+const documentRoutes = require("./routes/documentRoutes");
+app.use("/api/documents", documentRoutes);
+
 // Graceful MongoDB connection attempt (non-blocking fallback to in-memory store)
 let isMongoConnected = false;
 const connectDB = async () => {
