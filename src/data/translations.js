@@ -1,0 +1,283 @@
+export const LANGUAGES = [
+    { code: "en", name: "English", native: "English", voiceLang: "en-IN" },
+    { code: "hi", name: "Hindi", native: "हिन्दी", voiceLang: "hi-IN" },
+    { code: "mr", name: "Marathi", native: "मराठी", voiceLang: "mr-IN" },
+    { code: "bn", name: "Bengali", native: "বাংলা", voiceLang: "bn-IN" },
+    { code: "ta", name: "Tamil", native: "தமிழ்", voiceLang: "ta-IN" },
+    { code: "te", name: "Telugu", native: "తెలుగు", voiceLang: "te-IN" }
+];
+
+export const TRANSLATIONS = {
+    en: {
+        appTitle: "SevaSaathi",
+        subtitle: "Citizen-Service Agent for End-to-End GovTech",
+        tagline: "Navigate certificates, subsidies & licences autonomously with zero middlemen",
+        tabs: {
+            agent: "Citizen Agent",
+            portal: "Mock Gov Portal",
+            audit: "Immutable Audit Log",
+            escalation: "Jan-Sevak Helpdesk",
+            metrics: "Success Metrics",
+            designNote: "Design & Accountability Note"
+        },
+        chatPlaceholder: "Type your query or press mic to speak...",
+        voiceListening: "Listening to your voice...",
+        micTitle: "Speak in your language",
+        welcomeMessage: "Namaste! I am SevaSaathi, your trusted government service agent. Which service do you need today? I can help you with Income, Caste, or Domicile Certificates, PM-Kisan subsidy, Solar rooftop scheme, or Learner's Driving Licence.",
+        quickActions: [
+            "Apply for Income Certificate",
+            "PM-Kisan Subsidy Application",
+            "PM Surya Ghar Solar Subsidy",
+            "Learner's Driving Licence",
+            "Track My Application Status",
+            "Explain Consent & Privacy Rules"
+        ],
+        agentSteps: {
+            discovery: "1. Scheme Selection",
+            docs: "2. Document Validation",
+            autofill: "3. Form Autofill",
+            consent: "4. Explicit Consent",
+            portal: "5. Portal Submission",
+            complete: "6. Tracking & Certificate"
+        },
+        consentTitle: "Explicit Citizen Consent Required",
+        consentSubtitle: "Human-in-the-Loop Verification under DPDP Act 2023",
+        consentNotice: "Before SevaSaathi transmits any data to the Government Portal, your explicit informed consent is legally mandated.",
+        consentApprove: "I Consent: Submit to Government Portal",
+        consentDecline: "Decline & Cancel Action",
+        escalationBadge: "Jan-Sevak Escalation Active",
+        middlemanSaved: "Middleman Cost Saved",
+        verifiedDocuments: "Verified Documents",
+        portalStatus: "JanSeva Portal Status",
+        online: "Gateway Online (HTTP 200)",
+        tatLabel: "Official Turnaround",
+        govFeeLabel: "Official Fee",
+        zeroBroker: "Middleman Fee Avoided"
+    },
+    hi: {
+        appTitle: "सेवासाथी",
+        subtitle: "सरकारी सेवाओं के लिए आपका स्वायत्त डिजिटल साथी",
+        tagline: "बिना किसी दलाल या रिश्वत के प्रमाण पत्र, सब्सिडी और लाइसेंस प्राप्त करें",
+        tabs: {
+            agent: "नागरिक सहायक (एजेंट)",
+            portal: "मॉक सरकारी पोर्टल",
+            audit: "ऑडिट एवं सुरक्षा लेज़र",
+            escalation: "जन-सेवक हेल्पडेस्क",
+            metrics: "सफलता मेट्रिक्स",
+            designNote: "जवाबदेही एवं सहमति नोट"
+        },
+        chatPlaceholder: "अपना सवाल लिखें या बोलने के लिए माइक दबाएं...",
+        voiceListening: "आपकी आवाज सुनी जा रही है...",
+        micTitle: "अपनी भाषा में बोलें",
+        welcomeMessage: "नमस्ते! मैं सेवासाथी हूँ, आपका सरकारी सेवा सहायक। आज आपको किस सेवा की आवश्यकता है? मैं आय, जाति, निवास प्रमाण पत्र, पीएम-किसान, सोलर रूफटॉप या ड्राइविंग लाइसेंस में आपकी पूरी सहायता करूँगा।",
+        quickActions: [
+            "आय प्रमाण पत्र के लिए आवेदन करें",
+            "पीएम किसान सम्मान निधि सब्सिडी",
+            "पीएम सूर्य घर सोलर रूफटॉप",
+            "लर्नर ड्राइविंग लाइसेंस बनाएं",
+            "मेरे आवेदन की स्थिति जांचें",
+            "सहमति एवं डेटा सुरक्षा नियम"
+        ],
+        agentSteps: {
+            discovery: "१. योजना चयन",
+            docs: "२. दस्तावेज़ सत्यापन",
+            autofill: "३. फॉर्म ऑटो-फिल",
+            consent: "४. स्पष्ट सहमति",
+            portal: "५. सरकारी सबमिशन",
+            complete: "६. ट्रैकिंग व प्रमाण पत्र"
+        },
+        consentTitle: "नागरिक की स्पष्ट सहमति आवश्यक",
+        consentSubtitle: "डीपीडीपी अधिनियम 2023 के अंतर्गत मानव-सत्यापन",
+        consentNotice: "सरकारी पोर्टल पर डेटा भेजने से पहले कानूनन आपकी स्पष्ट सहमति अनिवार्य है।",
+        consentApprove: "मैं सहमति देता/देती हूँ: पोर्टल पर भेजें",
+        consentDecline: "अस्वीकार करें एवं रोकें",
+        escalationBadge: "जन-सेवक सहायता सक्रिय",
+        middlemanSaved: "दलालों की बचत",
+        verifiedDocuments: "सत्यापित दस्तावेज़",
+        portalStatus: "जनसेवा पोर्टल स्थिति",
+        online: "पोर्टल सक्रिय (200 OK)",
+        tatLabel: "सरकारी समय सीमा",
+        govFeeLabel: "सरकारी शुल्क",
+        zeroBroker: "दलाल शुल्क से मुक्ति"
+    },
+    mr: {
+        appTitle: "सेवासाथी",
+        subtitle: "शासकीय सेवांसाठी तुमचा डिजिटल सहाय्यक",
+        tagline: "दलालांशिवाय प्रमाणपत्रे, अनुदाने आणि परवाने मिळवा",
+        tabs: {
+            agent: "नागरिक सहाय्यक",
+            portal: "मॉक शासकीय पोर्टल",
+            audit: "ऑडिट लॉग",
+            escalation: "जन-सेवक डेस्क",
+            metrics: "यशस्वी मेट्रिक्स",
+            designNote: "सहमती व जबाबदारी"
+        },
+        chatPlaceholder: "तुमचा प्रश्न टाइप करा किंवा माइक दाबा...",
+        voiceListening: "आवाज ऐकत आहे...",
+        micTitle: "मराठीत बोला",
+        welcomeMessage: "नमस्कार! मी सेवासाथी आहे. उत्पन्न, जात, अधिवास प्रमाणपत्र किंवा पीएम किसान अनुदानासाठी मी तुमची मदत करू शकेन.",
+        quickActions: [
+            "उत्पन्न दाखला अर्ज",
+            "पीएम किसान योजना",
+            "सौर ऊर्जा योजना",
+            "ड्रायव्हिंग लायसन्स अर्ज",
+            "अर्जाची स्थिती तपासा"
+        ],
+        agentSteps: {
+            discovery: "१. सेवा निवड",
+            docs: "२. कागदपत्रे तपासणी",
+            autofill: "३. फॉर्म भरणे",
+            consent: "४. नागरिक सहमती",
+            portal: "५. पोर्टल सादर करणे",
+            complete: "६. प्रमाणपत्र जारी"
+        },
+        consentTitle: "स्पष्ट नागरिक सहमती आवश्यक",
+        consentSubtitle: "DPDP कायदा २०२३ अंतर्गत",
+        consentNotice: "शासकीय पोर्टलवर डेटा पाठवण्यापूर्वी तुमची स्पष्ट संमती आवश्यक आहे.",
+        consentApprove: "मी सहमती देतो: सादर करा",
+        consentDecline: "नाकारा",
+        escalationBadge: "जन-सेवक मदत सक्रिय",
+        middlemanSaved: "दलाल खर्च वाचवला",
+        verifiedDocuments: "तपासलेली कागदपत्रे",
+        portalStatus: "पोर्टल सक्रिय",
+        online: "पोर्टल सुरू आहे",
+        tatLabel: "कालावधी",
+        govFeeLabel: "शासकीय शुल्क",
+        zeroBroker: "वाचलेला दलाल खर्च"
+    },
+    bn: {
+        appTitle: "সেবা সাথী",
+        subtitle: "সরকারি পরিষেবার জন্য আপনার এআই সহকারী",
+        tagline: "দালাল ছাড়া সমস্ত শংসাপত্র ও অনুদান গ্রহণ করুন",
+        tabs: {
+            agent: "নাগরিক সহকারী",
+            portal: "মক সরকারি পোর্টাল",
+            audit: "অডিট লগ",
+            escalation: "জন-সেবক হেল্পডেস্ক",
+            metrics: "সাফল্যের পরিসংখ্যান",
+            designNote: "দায়বদ্ধতা নোট"
+        },
+        chatPlaceholder: "প্রশ্ন লিখুন বা কথা বলতে মাইক টিপুন...",
+        voiceListening: "শুনছি...",
+        micTitle: "বাংলায় বলুন",
+        welcomeMessage: "নমস্কার! আমি সেবা সাথী। আয় শংসাপত্র, জাতিগত শংসাপত্র, পিএম কিসান বা ড্রাইভিং লাইসেন্স সম্পর্কিত যে কোনও কাজে আমি সাহায্য করতে প্রস্তুত।",
+        quickActions: [
+            "আয় শংসাপত্রের আবেদন",
+            "পিএম কিষাণ সহায়তা",
+            "সোলার রুফটপ প্রকল্প",
+            "ড্রাইভিং লাইসেন্স",
+            "আবেদনের স্থিতি দেখুন"
+        ],
+        agentSteps: {
+            discovery: "১. স্কিম নির্বাচন",
+            docs: "২. নথি যাচাই",
+            autofill: "৩. ফর্ম পূরণ",
+            consent: "৪. নাগরিক সম্মতি",
+            portal: "৫. পোর্টাল জমা",
+            complete: "৬. শংসাপত্র প্রাপ্তি"
+        },
+        consentTitle: "স্পষ্ট নাগরিক সম্মতি আবশ্যক",
+        consentSubtitle: "ডিপিডিপি আইন ২০২৩ অনুযায়ী",
+        consentNotice: "সরকারি পোর্টালে তথ্য প্রেরণের পূর্বে আপনার সুস্পষ্ট সম্মতি প্রয়োজন।",
+        consentApprove: "আমি সম্মতি দিচ্ছি",
+        consentDecline: "প্রত্যাখ্যান করুন",
+        escalationBadge: "জন-সেবক সহায়তা উপলব্ধ",
+        middlemanSaved: "দালাল খরচ সাশ্রয়",
+        verifiedDocuments: "যাচাইকৃত নথি",
+        portalStatus: "পোর্টাল সক্রিয়",
+        online: "অনলাইন পোর্টাল",
+        tatLabel: "সময়সীমা",
+        govFeeLabel: "সরকারি ফি",
+        zeroBroker: "দালাল খরচ মুক্ত"
+    },
+    ta: {
+        appTitle: "சேவா சாதி",
+        subtitle: "அரசு சேவைகளுக்கான உங்களின் AI உதவியாளர்",
+        tagline: "இடைத்தரகர்கள் இன்றி சான்றிதழ்கள் மற்றும் மானியங்களைப் பெறுங்கள்",
+        tabs: {
+            agent: "குடிமக்கள் முகவர்",
+            portal: "அரசு போர்டல்",
+            audit: "தணிக்கை பதிவு",
+            escalation: "மக்கள் சேவகர் உதவி",
+            metrics: "வெற்றி விகிதம்",
+            designNote: "பொறுப்புணர்வு குறிப்பு"
+        },
+        chatPlaceholder: "தட்டச்சு செய்யவும் அல்லது பேச மைக் அழுத்தவும்...",
+        voiceListening: "கேட்கிறது...",
+        micTitle: "தமிழில் பேசுங்கள்",
+        welcomeMessage: "வணக்கம்! நான் சேவா சாதி. வருமானச் சான்றிதழ், சாதிச் சான்றிதழ், பிஎம் கிசான் மற்றும் ஓட்டுநர் உரிமம் பெற உதவுகிறேன்.",
+        quickActions: [
+            "வருமானச் சான்றிதழ் விண்ணப்பம்",
+            "பிஎம் கிசான் திட்டம்",
+            "சூரிய ஒளி மின்சார திட்டம்",
+            "ஓட்டுநர் உரிமம்",
+            "விண்ணப்ப நிலையை அறிய"
+        ],
+        agentSteps: {
+            discovery: "1. சேவை தேர்வு",
+            docs: "2. ஆவண சரிபார்ப்பு",
+            autofill: "3. படிவம் நிரப்புதல்",
+            consent: "4. பயனர் ஒப்புதல்",
+            portal: "5. போர்ட்டலில் சமர்ப்பித்தல்",
+            complete: "6. சான்றிதழ் வழங்குதல்"
+        },
+        consentTitle: "வெளிப்படையான ஒப்புதல் தேவை",
+        consentSubtitle: "DPDP சட்டம் 2023 இன் கீழ்",
+        consentNotice: "அரசு இணையதளத்திற்கு தரவை அனுப்பும் முன் உங்கள் ஒப்புதல் கட்டாயம்.",
+        consentApprove: "நான் ஒப்புக்கொள்கிறேன்",
+        consentDecline: "நிராகரி",
+        escalationBadge: "மக்கள் சேவகர் உதவி",
+        middlemanSaved: "சேமிக்கப்பட்ட இடைத்தரகர் கட்டணம்",
+        verifiedDocuments: "சரிபார்க்கப்பட்ட ஆவணங்கள்",
+        portalStatus: "அரசு போர்டல் நிலை",
+        online: "இணையதளம் செயலில் உள்ளது",
+        tatLabel: "கால அளவு",
+        govFeeLabel: "அரசு கட்டணம்",
+        zeroBroker: "இடைத்தரகர் இல்லாத சேவை"
+    },
+    te: {
+        appTitle: "సేవా సాథీ",
+        subtitle: "ప్రభుత్వ సేవల కొరకు మీ ఏఐ సహాయకుడు",
+        tagline: "దళారులు లేకుండా ధృవీకరణ పత్రాలు మరియు రాయితీలు పొందండి",
+        tabs: {
+            agent: "సిటిజన్ ఏజెంట్",
+            portal: "ప్రభుత్వ పోర్టల్",
+            audit: "ఆడిట్ లాగ్",
+            escalation: "జన సేవక్ డెస్క్",
+            metrics: "విజయ రేటు",
+            designNote: "జవాబుదారీతనం నోట్"
+        },
+        chatPlaceholder: "ఇక్కడ టైప్ చేయండి లేదా మాట్లాడటానికి మైక్ నొక్కండి...",
+        voiceListening: "వింటోంది...",
+        micTitle: "తెలుగులో మాట్లాడండి",
+        welcomeMessage: "నమస్కారం! నేను సేవాసాథీ. ఆదాయ ధృవీకరణ పత్రం, కుల ధృవీకరణ పత్రం, పీఎం కిసాన్ మరియు డ్రైవింగ్ లైసెన్స్ దరఖాస్తులో మీకు సహాయం చేస్తాను.",
+        quickActions: [
+            "ఆదాయ ధృవీకరణ పత్రం దరఖాస్తు",
+            "పీఎం కిసాన్ సాయం",
+            "సోలార్ రూఫ్‌టాప్ పథకం",
+            "డ్రైవింగ్ లైసెన్స్",
+            "దరఖాస్తు స్థితి చూడండి"
+        ],
+        agentSteps: {
+            discovery: "1. పథకం ఎంపిక",
+            docs: "2. పత్రాల తనిఖీ",
+            autofill: "3. ఫారమ్ పూరించడం",
+            consent: "4. స్పష్టమైన సమ్మతి",
+            portal: "5. పోర్టల్ సమర్పణ",
+            complete: "6. సర్టిఫికేట్ విడుదల"
+        },
+        consentTitle: "పౌరుడి స్పష్టమైన సమ్మతి అవసరం",
+        consentSubtitle: "DPDP చట్టం 2023 కింద",
+        consentNotice: "ప్రభుత్వ పోర్టల్‌కు డేటాను పంపే ముందు మీ సమ్మతి తప్పనిసరి.",
+        consentApprove: "నేను అంగీకరిస్తున్నాను",
+        consentDecline: "తిరస్కరించు",
+        escalationBadge: "జన సేవక్ సహాయం",
+        middlemanSaved: "ఆదా అయిన దళారి రుసుము",
+        verifiedDocuments: "ధృవీకరించబడిన పత్రాలు",
+        portalStatus: "పోర్టల్ సక్రియంగా ఉంది",
+        online: "గేట్‌వే ఆన్‌లైన్",
+        tatLabel: "కాలపరిమితి",
+        govFeeLabel: "ప్రభుత్వ రుసుము",
+        zeroBroker: "దళారి లేని పారదర్శక సేవ"
+    }
+};
